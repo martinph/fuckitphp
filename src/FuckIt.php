@@ -32,6 +32,19 @@ class FuckIt
     }
 
     /**
+     * @param callable $callable
+     * @param array $arguments
+     */
+    public static function callableFuckit ($callable, $arguments = [])
+    {
+        try {
+            call_user_func_array($callable, $arguments);
+        } catch(\Exception $e) {
+            // Ha, fuck it
+        }
+    }
+
+    /**
      * @param string $method
      * @param array $arguments
      * @return $this
@@ -76,7 +89,7 @@ class FuckIt
         try {
             if($this->hasProperty($property)) {
                 $this->fuckedObject->$property = $value;
-            }
+            } // @codeCoverageIgnore
         } catch(\Exception $e) {
             // This can get fucked as well
         }
@@ -106,7 +119,7 @@ class FuckIt
         try {
             if($this->hasProperty($property)) {
                 unset($this->fuckedObject->$property);
-            }
+            } // @codeCoverageIgnore
         } catch(\Exception $e) {
             // Not this time, fucker
         }
@@ -128,5 +141,22 @@ class FuckIt
     protected function hasMethod($method)
     {
         return $this->fuckedObjectReflection->hasMethod($method);
+    }
+
+    /**
+     * @param \Exception $e
+     * @return void Fuck it
+     */
+    public static function exceptionHandler(\Exception $e)
+    {
+        // Fuck it
+    } // @codeCoverageIgnore
+
+    /**
+     * @return void Fuck it
+     */
+    public static function errorHandler()
+    {
+        // Fuck this too
     }
 }
