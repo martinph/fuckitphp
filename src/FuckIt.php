@@ -24,7 +24,7 @@ class FuckIt
      */
     public function __construct($object)
     {
-        if(!is_object($object)) {
+        if (!is_object($object)) {
             $object = new \stdClass();
         }
         $this->fuckedObject = $object;
@@ -35,11 +35,11 @@ class FuckIt
      * @param callable $callable
      * @param array $arguments
      */
-    public static function callableFuckit ($callable, $arguments = [])
+    public static function callableFuckit($callable, $arguments = [])
     {
         try {
             call_user_func_array($callable, $arguments);
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             // Ha, fuck it
         }
     }
@@ -52,15 +52,15 @@ class FuckIt
     public function __call($method, $arguments)
     {
         try {
-            if($this->hasMethod($method)) {
+            if ($this->hasMethod($method)) {
                 $result = call_user_func_array([$this->fuckedObject, $method], $arguments);
                 $class = get_class($this->fuckedObject);
-                if($result instanceof $class) {
+                if ($result instanceof $class) {
                     return $this;
                 }
                 return $result;
             }
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             // Fuck it
         }
     }
@@ -72,10 +72,10 @@ class FuckIt
     public function __get($property)
     {
         try {
-            if($this->hasProperty($property)) {
+            if ($this->hasProperty($property)) {
                 return $this->fuckedObject->$property;
             }
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             // Fuck this too
         }
     }
@@ -87,10 +87,10 @@ class FuckIt
     public function __set($property, $value)
     {
         try {
-            if($this->hasProperty($property)) {
+            if ($this->hasProperty($property)) {
                 $this->fuckedObject->$property = $value;
             } // @codeCoverageIgnore
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             // This can get fucked as well
         }
     }
@@ -102,10 +102,10 @@ class FuckIt
     public function __isset($property)
     {
         try {
-            if($this->hasProperty($property)) {
+            if ($this->hasProperty($property)) {
                 return isset($this->fuckedObject->$property);
             }
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             // You want some? Well fuck off
         }
         return false; // Fuck it
@@ -117,10 +117,10 @@ class FuckIt
     public function __unset($property)
     {
         try {
-            if($this->hasProperty($property)) {
+            if ($this->hasProperty($property)) {
                 unset($this->fuckedObject->$property);
             } // @codeCoverageIgnore
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             // Not this time, fucker
         }
     }
