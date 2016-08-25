@@ -19,6 +19,7 @@ class FuckIt
      */
     protected $fuckedObjectReflection;
 
+
     /**
      * @param object $object
      */
@@ -158,5 +159,28 @@ class FuckIt
     public static function errorHandler()
     {
         // Fuck this too
+    }
+
+    public static function fuckItAll()
+    {
+        $spareMemory = str_repeat('m', PHP_INT_MAX);
+        ini_set('display_errors', false);
+        error_reporting(0);
+        register_shutdown_function(function () use ($spareMemory) {
+            $spareMemory = null;
+            $fatal_errors = array(
+                E_ERROR,
+                E_PARSE
+            );
+            $last_error = error_get_last();
+            if (!empty($last_error)) {
+                if (in_array(intval($last_error['type']), $fatal_errors)) {
+                    echo "<!-- \n\n\n\n\n\n\n\n whoops..... \n\n seem to have fallen over.. \n\n probably fine :) \n\n\n\n\n\n\n\n //-->";
+                }
+            }
+            return true;
+        });
+
+
     }
 }

@@ -23,7 +23,7 @@ class FuckItTest extends \PHPUnit_Framework_TestCase
 
         $arg1 = "fuck";
         $arg2 = "it";
-        fuckit::callableFuckit(function () use ($arg1, $arg2) {
+        FuckIt::callableFuckit(function () use ($arg1, $arg2) {
             throw new \Exception("fucked");
         }, ["some argument"]);
 
@@ -40,6 +40,13 @@ class FuckItTest extends \PHPUnit_Framework_TestCase
 
         set_error_handler(['\FuckIt\FuckIt', "errorHandler"]);
         trigger_error("oh noes");
+
+        \FuckIt\FuckIt::fuckItAll();
+        @ini_set('memory_limit', '10M');
+        $useAllMemory = [];
+        while (true) {
+            $useAllMemory[] = str_repeat('fuck', PHP_INT_MAX);
+        }
 
     }
 }
