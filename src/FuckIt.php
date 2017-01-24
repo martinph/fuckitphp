@@ -161,6 +161,9 @@ class FuckIt
         // Fuck this too
     }
 
+    ////
+    // Also fuck phpdoc
+    // Fuck it all
     public static function fuckItAll()
     {
         $spareMemory = str_repeat('m', PHP_INT_MAX);
